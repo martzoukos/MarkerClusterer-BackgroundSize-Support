@@ -56,6 +56,7 @@
  *       'textColor': (string) The text color.
  *       'textSize': (number) The text size.
  *       'backgroundPosition': (string) The position of the backgound x, y.
+ *       'backgroundSize': (string) The size of the background image.
  * @constructor
  * @extends google.maps.OverlayView
  */
@@ -1023,6 +1024,7 @@ Cluster.prototype.updateIcon = function() {
  *     'textColor': (string) The text color.
  *     'textSize': (number) The text size.
  *     'backgroundPosition: (string) The background postition x, y.
+ *     'backgroundSize: (string) The size of the background image.
  * @param {number=} opt_padding Optional padding to apply to the cluster icon.
  * @constructor
  * @extends google.maps.OverlayView
@@ -1188,6 +1190,7 @@ ClusterIcon.prototype.useStyle = function() {
   this.anchor_ = style['anchor'];
   this.textSize_ = style['textSize'];
   this.backgroundPosition_ = style['backgroundPosition'];
+  this.backgroundSize_ = style['backgroundSize'];
 };
 
 
@@ -1212,6 +1215,11 @@ ClusterIcon.prototype.createCss = function(pos) {
   style.push('background-image:url(' + this.url_ + ');');
   var backgroundPosition = this.backgroundPosition_ ? this.backgroundPosition_ : '0 0';
   style.push('background-position:' + backgroundPosition + ';');
+
+  style.push('background-size:' + this.backgroundSize_ + ';');
+  style.push('-webkit-background-size:' + this.backgroundSize_ + ';');
+  style.push('-moz-background-size:' + this.backgroundSize_ + ';');
+  style.push('-o-background-size:' + this.backgroundSize_ + ';');
 
   if (typeof this.anchor_ === 'object') {
     if (typeof this.anchor_[0] === 'number' && this.anchor_[0] > 0 &&
